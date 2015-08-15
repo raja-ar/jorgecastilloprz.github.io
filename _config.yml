@@ -9,7 +9,7 @@ relative_permalinks: true
 # Setup
 title:            Jorge Castillo
 tagline:          'Android Dev'
-description:      'Senior Android Dev'
+description:      'Android Dev'
 url:              http://jorgecastillo.xyz
 baseurl:          /
 
