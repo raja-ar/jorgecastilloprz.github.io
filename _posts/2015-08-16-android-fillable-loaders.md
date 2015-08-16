@@ -71,7 +71,7 @@ The `drawingState` list for the view is going to be:
 
 * `NOT_STARTED`: This is the beginning one.
 * `TRACE_STARTED`: The silhouette (dash, stroke, trace) is being drawn.
-* `FILL_STARTED`: The trace drawing got completed and now we are filling the view.
+* `FILL_STARTED`: Trace got completed and now we are filling the view.
 * `FINISHED`: This is obviously the final state of the view.
 
 Every time the view switches it's state, the `OnStateChangeListener` method will be called to give external 
@@ -90,8 +90,10 @@ dashPaint = new Paint();
     dashPaint.setColor(strokeColor);
 ```
 
-Everything pretty normal. But how to draw the dash? If you think about it, we will need to draw a little 
-bit more of the line in every cycle. So the line will keep growing, and the space still not drawn will decrease. There is one method that will come really handy to us in the Android SDK to get this effect done. The `dashPaint.setPathEffect(new DashPathEffect(...)))` method. As its documentation says, the `DashPathEffect` will need to get an array of intervals in its constructor which must have an even number of items. The even indices of the array will specify the "on" intervals, and the odd indices specifying the "off" intervals. The second argument will be a phase value which will be used as an offset into the array, but which we will not be using for this library.
+Everything is pretty normal. But how to draw the dash? If you think about it, we will need to draw a little 
+bit more of the line in every cycle. So the line will keep growing, and the space still not drawn will decrease. 
+
+There is one method that will come really handy to us in the Android SDK to get this effect done. The `dashPaint.setPathEffect(new DashPathEffect(...)))` method. As its documentation says, the `DashPathEffect` will need to get an array of intervals in its constructor which must have an even number of items. The even indices of the array will specify the "on" intervals, and the odd indices specifying the "off" intervals. The second argument will be a phase value which will be used as an offset into the array, but which we will not be using for this library.
 
 **Note:** this patheffect only affects drawing with the paint's style set to STROKE or FILL_AND_STROKE. It is ignored if the drawing is done with style == FILL.
 
