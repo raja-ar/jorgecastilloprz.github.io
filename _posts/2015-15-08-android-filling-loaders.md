@@ -179,13 +179,13 @@ So here we have the first sample working! Feel free to check the full [SpikesCli
 
 The `transform()` method will look exactly like the one from the previous sample, so i am not copying it here again. We will focus in the path building, as it is the most interesting stuff here.
 
-I have 128 different waves propagated over the time so i can rotate over them:
+I have 128 different wave batches propagated over the time so i can rotate over them:
 ```java
 private void buildClippingPath() {
-    buildWaveAtIndex(currentWave++ % 128, 128);
+    buildWaveAtIndex(currentWaveBatch++ % 128, 128);
 }
 ```
-128 is just an arbitrary number, and the more waves you add to the loop, the slower will become the total animation. Think about them as frames of a standard animation (it is what they really are at a concept level). So the `index` argument of the following method will change for every `onDraw()` call.
+128 is just an arbitrary number, and the more wave batches you add to the loop, the slower will become the total animation. Think about them as frames of a standard animation (it is what they really are at a concept level). So the `index` argument of the following method will change for every `onDraw()` call. The batches will contain four waves each, and those waves contained will vary its position and `Y` variation depending on the `currentWaveBatch` index.
 ```java
 private void buildWaveAtIndex(int index, int waveCount) {
     float startingHeight = height - 20;
@@ -273,10 +273,25 @@ private float nextFloat(float upperBound) {
     return (Math.abs(random.nextFloat()) % (upperBound + 1));
 }
 ```
+As i said, there are 4 waves being drawn for every wave batch constructed by the above method. The `xMovement` var is pretty explicit, as it handles the movement shifting over the `X` axis. The waves are getting drawn using the `path.quatTo()` method, which draws a quadratic *Bezier* courve starting at the current point of the path, using the first given point (X,Y coordinates) as a control point, and ending into the last given point coordinates. 
+```java
+path.quadTo(controlPointX, controlPointY, endPointX, endPointY)
+```
+
+<div style="text-align:center">
+![bez-curve]
+</div>
+
+The variation will be random, and applied to the control point `Y` coordinate with an alternate sign for each one of the waves, so we can get the concave / convex alternation. The `divisions` are 8 (half a wave) to know where to start every wave.
+It is a little bit tedious to understand at the beginning, but i hope you can get a clear idea of how to get theese sort of clipping path figures working. Here is a sample of the final result for the wave effect:
+
 <div style="text-align:center">
 ![waves-gif]
 </div>
 
+Cheers!
+
 [small-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSmall.gif
 [spikes-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSpikes.gif
 [waves-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoWaves.gif
+[bez-curve]: ./art/quad_bez_curve.jpg
