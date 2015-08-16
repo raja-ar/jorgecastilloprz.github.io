@@ -212,7 +212,7 @@ So here we have the first sample working! Feel free to check the full [SpikesCli
 
 ## WavesClippingTransform
 
-The `transform()` method will look exactly like the one from the previous sample, so i am not copying it here again. We will focus in the path building, as it is the most interesting stuff here.
+The `transform()` method for this one will look exactly like the one from the previous sample, so i am not copying it here again. We will focus in the path building, as it is the most interesting stuff here.
 
 I have 128 different wave batches propagated over the time so i can rotate over them:
 
@@ -222,7 +222,7 @@ private void buildClippingPath() {
 }
 ```
 
-128 is just an arbitrary number, and the more wave batches you add to the loop, the slower will become the total animation. Think about them as frames of a standard animation (it is what they really are at a concept level). So the `index` argument of the following method will change for every `onDraw()` call. The batches will contain four waves each, and those waves contained will vary its position and `Y` variation depending on the `currentWaveBatch` index.
+128 is just an arbitrary number, and the more wave batches you add to the loop, the slower will become the total animation. Think about them as frames of a standard animation (it is what they really are at a concept level). So the `index` argument of the following method will change for every `onDraw()` call. The batches will contain four waves each, and those waves contained will vary its `X` axis position and `Y` variation depending on the `currentWaveBatch` index.
 
 ```java
 private void buildWaveAtIndex(int index, int waveCount) {
