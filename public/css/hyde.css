@@ -45,6 +45,10 @@ html {
   }
 }
 
+/* To center images */
+.center {
+  text-align: center;
+}
 
 /*
  * Sidebar
