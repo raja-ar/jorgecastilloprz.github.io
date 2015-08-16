@@ -344,6 +344,8 @@ It can feel a little bit tedious to understand at the beginning, but i hope you 
 
 And that is all! Dont forget to checkout [AndroidFillableLoaders](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders) library for plenty of details!.
 
+{% include twitter_plug.html %}
+
 Cheers!
 
 [small-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSmall.gif
