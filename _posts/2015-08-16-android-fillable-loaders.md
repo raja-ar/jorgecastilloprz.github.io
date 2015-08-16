@@ -105,13 +105,15 @@ float phase
 float distance = animInterpolator.getInterpolation(phase) 
     * pathData.length;
 
-dashPaint.setPathEffect(new DashPathEffect(new float[] { distance, pathData.length }, 0));
+dashPaint.setPathEffect(
+    new DashPathEffect(new float[] { distance, pathData.length }, 0));
+    
 canvas.drawPath(pathData.path, dashPaint);
 ```
 
 We will get the current percent of the total time of the "animation" and the distance of the line to get drawn will be obtained from it, using an interpolator (a `DecelerateInterpolator`) as a base for the values. The `pathData.length` has been obtained previously using the [PathMeasure](http://developer.android.com/reference/android/graphics/PathMeasure.html) class.
 
-So here it is, we already have our dash effect getting drawn. So lets keep moving!
+So here it is, we already have our dash effect getting drawn. See [FillableLoader class](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders/blob/master/library%2Fsrc%2Fmain%2Fjava%2Fcom%2Fgithub%2Fjorgecastillo%2FFillableLoader.java) for more detailed info. Now lets keep moving!
 
 # Filling Drawing
 
