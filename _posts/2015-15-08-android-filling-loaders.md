@@ -9,7 +9,7 @@ read it carefully, and if you are capable of understanding it properly, you will
 interesting figures and animations like the following one:
 
 <div style="text-align:center">
-![Small-gif]
+![small-gif]
 </div>
 
 Isn't that cool?. The previous animation has been extracted from the [AndroidFillableLoaders library](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders) 
@@ -69,7 +69,7 @@ status to the following one.
 The `drawingState` list for the view is going to be:
 * `NOT_STARTED`: This is the beginning one.
 * `TRACE_STARTED`: The silhouette (dash, stroke, trace) is being drawn.
-* `FILL_STARTED`: The trace drawing got complete and now we are filling the view.
+* `FILL_STARTED`: The trace drawing got completed and now we are filling the view.
 * `FINISHED`: This is obviously the final state of the view.
 
 Every time the view switches it's state, the `OnStateChangeListener` method will be called to give external 
@@ -105,15 +105,79 @@ So here it is, we already have our dash effect getting drawn. So lets keep movin
 
 # Filling Drawing
 
-So the filling drawing code will look like this:
+Again, i have a paint ready for this matter. This time is just  a common filling paint:
+```java
+fillPaint = new Paint();
+    fillPaint.setAntiAlias(true);
+    fillPaint.setStyle(Paint.Style.FILL);
+    fillPaint.setColor(fillColor);
+```
+
+So the drawing code will look like this (into the `onDraw()` method):
 ```java
 float fillPhase = MathUtil.constrain(0, 1, (elapsedTime - strokeDrawingDuration) * 1f / fillDuration);
 clippingTransform.transform(canvas, fillPhase, this);
 canvas.drawPath(pathData.path, fillPaint);
 ```
-As you can see, the time phase will be the percent of time consumed for filling drawing until this very moment. To calculate that we must substract the `strokeDrawingDuration` as it was used for the dash animation.
+As you can see, the time phase will be the percent of time consumed for filling drawing until this very moment. To calculate that we must substract the `strokeDrawingDuration` as it was used for the stroke (dash) animation.
 
-The `transform()` method will be delegated into a [ClippingTransform](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders/blob/master/library%2Fsrc%2Fmain%2Fjava%2Fcom%2Fgithub%2Fjorgecastillo%2Fclippingtransforms%2FClippingTransform.java) implementation and the logic in charge to create the filling effect would reside into it.
+The clipping logic will be delegated into a [ClippingTransform](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders/blob/master/library%2Fsrc%2Fmain%2Fjava%2Fcom%2Fgithub%2Fjorgecastillo%2Fclippingtransforms%2FClippingTransform.java) 
+implementation and the logic in charge to create the filling effect would reside into it's `transform()` method.
+The only secret here is to think about clipping forms. If we have a figure that is getting drawn by a filling 
+paint (and limited by the path bounds), we would want to get a clipping figure attached to the canvas before the filling figure is drawn, so the filling gets clipped by the form we used.
+
+To understand this, i will use two examples.
+
+## SpikesClippingTransform
+
+The `transform()` method for this custom `ClippingTransform` would look like:
+```java
+@Override public void transform(Canvas canvas, float currentFillPhase, View view) {
+    cacheDimensions(view.getWidth(), view.getHeight());
+    buildClippingPath();
+    spikesPath.offset(0, height * -currentFillPhase);
+    canvas.clipPath(spikesPath, Region.Op.DIFFERENCE);
+}
+```
+Ignore the `cacheDimensions()` method, as it is only used to store view dimensions in memory at first, and just once. The important stuff here is in the last three lines. The method `buildClippingPath()` will setup the `spikesPath` with the path we need to draw a figure with spikes border. I will give you a graphic example:
+
+<div style="text-align:center">
+![spikes-gif]
+</div>
+
+Once the spikes path is created, we will give it an `Y` dimension offset that will change depending on the `currentFillPhase` percent and the view height, so in every `onDraw()` call it will get shifted a little bit more to the top. That is simple. At the end, the `canvas.clipPath()` method will be used to set the clipping path to the created and positioned `spikesPath`, and we will use a `DIFFERENCE` operation between regions approach. (just for this time, but it is totally optional, you could create your `ClippingTransform` implementation basing it into another operations, like the default one, which is `INTERSECT`) (See [Region.Op documentation](http://developer.android.com/reference/android/graphics/Region.Op.html) for more details).
+
+But, how to draw the spikes path? Here we are:
+
+```java
+private void buildClippingPath() {
+    float heightDiff = width * 1f / 32;
+    float widthDiff = width * 1f / 32;
+    float startingHeight = height - heightDiff;
+
+    spikesPath.moveTo(0, startingHeight);
+
+    float nextX = widthDiff;
+    float nextY = startingHeight + heightDiff;
+
+    for (int i = 0; i < 32; i++) {
+      spikesPath.lineTo(nextX, nextY);
+      nextX += widthDiff;
+      nextY += (i % 2 == 0) ? heightDiff : -heightDiff;
+    }
+
+    spikesPath.lineTo(width, 0);
+    spikesPath.lineTo(0, 0);
+    spikesPath.close();
+  }
+```
+Dont be afraid about it. If you analyze it you will see that i am just using a constant `withDiff` value to shift in X axis between each spike, and a `heightDiff` value to be used as a positive/negative shift alternation in order to move the next Y coordinate and create the spikes.
+
+So here we have the first sample working! Feel free to check the full [SpikesClippingTransform](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders/blob/master/library%2Fsrc%2Fmain%2Fjava%2Fcom%2Fgithub%2Fjorgecastillo%2Fclippingtransforms%2FSpikesClippingTransform.java) class out if you want more details about it!
+
+## WavesClippingTransform
 
 
-[Small-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSmall.gif
+
+[small-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSmall.gif
+[spikes-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSpikes.gif
