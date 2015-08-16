@@ -177,6 +177,98 @@ So here we have the first sample working! Feel free to check the full [SpikesCli
 
 ## WavesClippingTransform
 
+The `transform()` method will look like the previous sample one exactly, so i am not copying it here again. We will focus in the path building, as it is the most interesting stuff here. I will give you the code directly:
+```java
+private void buildClippingPath() {
+    buildWaveAtIndex(currentWave++ % 128, 128);
+}
+
+private void buildWaveAtIndex(int index, int waveCount) {
+    float startingHeight = height - 20;
+    boolean initialOrLast = (index == 1 || index == waveCount);
+
+    float xMovement = (width * 1f / waveCount) * index;
+    float divisions = 8;
+    float variation = 10;
+
+    wavesPath.moveTo(-width, startingHeight);
+
+    // First wave
+    if (!initialOrLast) {
+      variation = randomFloat();
+    }
+
+    wavesPath.quadTo(-width + width * 1f / divisions + xMovement, startingHeight + variation,
+        -width + width * 1f / 4 + xMovement, startingHeight);
+
+    if (!initialOrLast) {
+      variation = randomFloat();
+    }
+
+    wavesPath.quadTo(-width + width * 1f / divisions * 3 + xMovement, startingHeight - variation,
+        -width + width * 1f / 2 + xMovement, startingHeight);
+
+    // Second wave
+    if (!initialOrLast) {
+      variation = randomFloat();
+    }
+
+    wavesPath.quadTo(-width + width * 1f / divisions * 5 + xMovement, startingHeight + variation,
+        -width + width * 1f / 4 * 3 + xMovement, startingHeight);
+
+    if (!initialOrLast) {
+      variation = randomFloat();
+    }
+
+    wavesPath.quadTo(-width + width * 1f / divisions * 7 + xMovement, startingHeight - variation,
+        -width + width + xMovement, startingHeight);
+
+    // Third wave
+    if (!initialOrLast) {
+      variation = randomFloat();
+    }
+
+    wavesPath.quadTo(width * 1f / divisions + xMovement, startingHeight + variation,
+        width * 1f / 4 + xMovement, startingHeight);
+
+    if (!initialOrLast) {
+      variation = randomFloat();
+    }
+
+    wavesPath.quadTo(width * 1f / divisions * 3 + xMovement, startingHeight - variation,
+        width * 1f / 2 + xMovement, startingHeight);
+
+    // Forth wave
+    if (!initialOrLast) {
+      variation = randomFloat();
+    }
+
+    wavesPath.quadTo(width * 1f / divisions * 5 + xMovement, startingHeight + variation,
+        width * 1f / 4 * 3 + xMovement, startingHeight);
+
+    if (!initialOrLast) {
+      variation = randomFloat();
+    }
+
+    wavesPath.quadTo(width * 1f / divisions * 7 + xMovement, startingHeight - variation,
+        width + xMovement, startingHeight);
+
+    // Closing path
+    wavesPath.lineTo(width + 100, startingHeight);
+    wavesPath.lineTo(width + 100, 0);
+    wavesPath.lineTo(0, 0);
+    wavesPath.close();
+}
+
+private float randomFloat() {
+    return nextFloat(10) + height * 1f / 25;
+}
+
+private float nextFloat(float upperBound) {
+    Random random = new Random();
+    return (Math.abs(random.nextFloat()) % (upperBound + 1));
+}
+```
 
 
 [small-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSmall.gif
