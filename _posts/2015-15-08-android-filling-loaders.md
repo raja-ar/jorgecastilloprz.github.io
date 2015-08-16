@@ -180,7 +180,7 @@ So here we have the first sample working! Feel free to check the full [SpikesCli
 The `transform()` method will look exactly like the one from the previous sample, so i am not copying it here again. We will focus in the path building, as it is the most interesting stuff here.
 
 I have 128 different waves propagated over the time so i can rotate over them:
-```
+```java
 private void buildClippingPath() {
     buildWaveAtIndex(currentWave++ % 128, 128);
 }
