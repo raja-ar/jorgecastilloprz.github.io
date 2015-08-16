@@ -240,60 +240,76 @@ private void buildWaveAtIndex(int index, int waveCount) {
       variation = randomFloat();
     }
 
-    wavesPath.quadTo(-width + width * 1f / divisions + xMovement, startingHeight + variation,
-        -width + width * 1f / 4 + xMovement, startingHeight);
+    wavesPath.quadTo(-width + width * 1f / divisions + xMovement, 
+                    startingHeight + variation, 
+                    -width + width * 1f / 4 + xMovement, 
+                    startingHeight);
 
     if (!initialOrLast) {
       variation = randomFloat();
     }
 
-    wavesPath.quadTo(-width + width * 1f / divisions * 3 + xMovement, startingHeight - variation,
-        -width + width * 1f / 2 + xMovement, startingHeight);
+    wavesPath.quadTo(-width + width * 1f / divisions * 3 + xMovement, 
+                    startingHeight - variation,
+                    -width + width * 1f / 2 + xMovement, 
+                    startingHeight);
 
     // Second wave
     if (!initialOrLast) {
       variation = randomFloat();
     }
 
-    wavesPath.quadTo(-width + width * 1f / divisions * 5 + xMovement, startingHeight + variation,
-        -width + width * 1f / 4 * 3 + xMovement, startingHeight);
+    wavesPath.quadTo(-width + width * 1f / divisions * 5 + xMovement, 
+                    startingHeight + variation,
+                    -width + width * 1f / 4 * 3 + xMovement,
+                     startingHeight);
 
     if (!initialOrLast) {
       variation = randomFloat();
     }
 
-    wavesPath.quadTo(-width + width * 1f / divisions * 7 + xMovement, startingHeight - variation,
-        -width + width + xMovement, startingHeight);
+    wavesPath.quadTo(-width + width * 1f / divisions * 7 + xMovement,
+                    startingHeight - variation, 
+                    -width + width + xMovement, 
+                    startingHeight);
 
     // Third wave
     if (!initialOrLast) {
       variation = randomFloat();
     }
 
-    wavesPath.quadTo(width * 1f / divisions + xMovement, startingHeight + variation,
-        width * 1f / 4 + xMovement, startingHeight);
+    wavesPath.quadTo(width * 1f / divisions + xMovement, 
+                    startingHeight + variation, 
+                    width * 1f / 4 + xMovement,
+                    startingHeight);
 
     if (!initialOrLast) {
       variation = randomFloat();
     }
 
-    wavesPath.quadTo(width * 1f / divisions * 3 + xMovement, startingHeight - variation,
-        width * 1f / 2 + xMovement, startingHeight);
+    wavesPath.quadTo(width * 1f / divisions * 3 + xMovement, 
+                    startingHeight - variation, 
+                    width * 1f / 2 + xMovement, 
+                    startingHeight);
 
     // Forth wave
     if (!initialOrLast) {
       variation = randomFloat();
     }
 
-    wavesPath.quadTo(width * 1f / divisions * 5 + xMovement, startingHeight + variation,
-        width * 1f / 4 * 3 + xMovement, startingHeight);
+    wavesPath.quadTo(width * 1f / divisions * 5 + xMovement, 
+                    startingHeight + variation, 
+                    width * 1f / 4 * 3 + xMovement, 
+                    startingHeight);
 
     if (!initialOrLast) {
       variation = randomFloat();
     }
 
-    wavesPath.quadTo(width * 1f / divisions * 7 + xMovement, startingHeight - variation,
-        width + xMovement, startingHeight);
+    wavesPath.quadTo(width * 1f / divisions * 7 + xMovement, 
+                    startingHeight - variation,
+                    width + xMovement, 
+                    startingHeight);
 
     // Closing path
     wavesPath.lineTo(width + 100, startingHeight);
@@ -321,7 +337,8 @@ path.quadTo(controlPointX, controlPointY, endPointX, endPointY)
 ![bez-curve]
 
 The variation will be random, and applied to the control point `Y` coordinate with an alternate sign for each one of the waves, so we can get the concave / convex alternation. The `divisions` are 8 (half a wave) to know where to start every wave.
-It is a little bit tedious to understand at the beginning, but i hope you can get a clear idea of how to get theese sort of clipping path figures working. Here is a sample of the final result for the wave effect:
+
+It can feel a little bit tedious to understand at the beginning, but i hope you can get a clear idea of how to get theese sort of clipping path figures / animations working. Here is a sample of the final result for the wave effect:
 
 ![waves-gif]
 
