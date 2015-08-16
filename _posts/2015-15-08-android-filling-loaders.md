@@ -177,12 +177,16 @@ So here we have the first sample working! Feel free to check the full [SpikesCli
 
 ## WavesClippingTransform
 
-The `transform()` method will look exactly like the one from the previous sample, so i am not copying it here again. We will focus in the path building, as it is the most interesting stuff here. I will give you the code directly:
-```java
+The `transform()` method will look exactly like the one from the previous sample, so i am not copying it here again. We will focus in the path building, as it is the most interesting stuff here.
+
+I have 128 different waves propagated over the time so i can rotate over them:
+```
 private void buildClippingPath() {
     buildWaveAtIndex(currentWave++ % 128, 128);
 }
-
+```
+128 is just an arbitrary number, and the more waves you add to the loop, the slower will become the total animation. Think about them as frames of a standard animation (it is what they really are at a concept level). So the `index` argument of the following method will change for every `onDraw()` call.
+```java
 private void buildWaveAtIndex(int index, int waveCount) {
     float startingHeight = height - 20;
     boolean initialOrLast = (index == 1 || index == waveCount);
@@ -269,7 +273,6 @@ private float nextFloat(float upperBound) {
     return (Math.abs(random.nextFloat()) % (upperBound + 1));
 }
 ```
-
 <div style="text-align:center">
 ![waves-gif]
 </div>
