@@ -44,7 +44,9 @@ M 2948.00,18.00
 ```
 
 This is the SVG Path that you will parse to convert it to a `Path` object which will be 
-totally supported by the library. To parse it, i am using the 
+totally supported by the library. 
+
+To parse it, i am using the 
 [SvgPathParser](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders/blob/master/library%2Fsrc%2Fmain%2Fjava%2Fcom%2Fgithub%2Fjorgecastillo%2Fsvg%2FSvgPathParser.java) 
 class from [romannurik's Muzei](https://github.com/romannurik/muzei) code.
 There is not so much to look at here, it is just a *"made by hand"* parser which converts standard path 
@@ -60,12 +62,13 @@ relatively positioned.
 
 `FillableLoader` is the main view here, and it has a limited number of statuses which will 
 succeed one to another in order to get the complete animation working. Statuses are just flags 
-that will tell the view to get drawn by one way or another at the current drawing cycle (`onDraw()` method).
-At the same time, you should know that every animation from the composition will have it's own 
+that will tell the view how to get drawn at the current drawing cycle (`onDraw()` method).
+At the same time, you should know that every animation from the composition (Dash / Filling) will have it's own 
 duration, and that will let the View know when each step is finished, so it can change it's current 
 status to the following one.
  
 The `drawingState` list for the view is going to be:
+
 * `NOT_STARTED`: This is the beginning one.
 * `TRACE_STARTED`: The silhouette (dash, stroke, trace) is being drawn.
 * `FILL_STARTED`: The trace drawing got completed and now we are filling the view.
