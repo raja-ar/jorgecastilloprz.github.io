@@ -346,8 +346,6 @@ And that is all! Dont forget to checkout [AndroidFillableLoaders](https://github
 
 {% include twitter_plug.html %}
 
-Cheers!
-
 [small-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSmall.gif
 [spikes-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSpikes.gif
 [waves-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoWaves.gif
