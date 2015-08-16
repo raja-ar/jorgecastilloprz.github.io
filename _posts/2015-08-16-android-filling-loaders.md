@@ -8,7 +8,7 @@ we use to feel weird, as it seems to be a little bit tedious. But it is not that
 read it carefully, and if you are capable of understanding it properly, you will end up creating really 
 interesting figures and animations like the following one:
 
-![small-gif]
+![small-gif]{: .center-image }
 
 Isn't that cool?. The previous animation has been extracted from the [AndroidFillableLoaders library](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders) 
 which was published by me some days ago. The lib wants to create an interesting filling effect for a custom silhouette 
@@ -149,7 +149,7 @@ The `transform()` method for this custom `ClippingTransform` would look like:
 
 Ignore the `cacheDimensions()` method, as it is only used to store view dimensions in memory at first, and just once. The important stuff here is in the last three lines. The method `buildClippingPath()` will setup the `spikesPath` with the path we need to draw a figure with spikes border. I will give you a graphic example:
 
-![spikes-gif]
+![spikes-gif]{: .center-image }
 
 Once the spikes path is created, we will give it an `Y` dimension offset that will change depending on the `currentFillPhase` percent and the view height, so in every `onDraw()` call it will get shifted a little bit more to the top. That is simple. At the end, the `canvas.clipPath()` method will be used to set the clipping path to the created and positioned `spikesPath`, and we will use a `DIFFERENCE` operation between regions approach. (just for this time, but it is totally optional, you could create your `ClippingTransform` implementation basing it into another operations, like the default one, which is `INTERSECT`) (See [Region.Op documentation](http://developer.android.com/reference/android/graphics/Region.Op.html) for more details).
 
@@ -290,12 +290,12 @@ As i said, there are 4 waves being drawn for every wave batch constructed by the
 path.quadTo(controlPointX, controlPointY, endPointX, endPointY)
 ```
 
-![bez-curve]
+![bez-curve]{: .center-image }
 
 The variation will be random, and applied to the control point `Y` coordinate with an alternate sign for each one of the waves, so we can get the concave / convex alternation. The `divisions` are 8 (half a wave) to know where to start every wave.
 It is a little bit tedious to understand at the beginning, but i hope you can get a clear idea of how to get theese sort of clipping path figures working. Here is a sample of the final result for the wave effect:
 
-<img style="float: right" src="![waves-gif]">
+![waves-gif]{: .center-image }
 
 Cheers!
 
