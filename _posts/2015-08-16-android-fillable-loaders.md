@@ -95,13 +95,15 @@ bit more of the line in every cycle. So the line will keep growing, and the spac
 
 There is one method that will come really handy to us in the Android SDK to get this effect done. The `dashPaint.setPathEffect(new DashPathEffect(...)))` method. As its documentation says, the `DashPathEffect` will need to get an array of intervals in its constructor which must have an even number of items. The even indices of the array will specify the "on" intervals, and the odd indices specifying the "off" intervals. The second argument will be a phase value which will be used as an offset into the array, but which we will not be using for this library.
 
-**Note:** this patheffect only affects drawing with the paint's style set to `STROKE` or `FILL_AND_STROKE`. It is ignored if the drawing is done with style == FILL.
+**Note:** this patheffect only affects drawing with the paint's style set to `STROKE` or `FILL_AND_STROKE`. It is ignored if the drawing is done with style == `FILL`.
 
 But we are missing something here, right? The length of the dash for the current cycle that needs to get drawn. The complete code would be (into the `onDraw()` method):
 
 ```java
-float phase = MathUtil.constrain(0, 1, elapsedTime * 1f / strokeDrawingDuration);
-float distance = animInterpolator.getInterpolation(phase) * pathData.length;
+float phase 
+    = MathUtil.constrain(0, 1, elapsedTime * 1f / strokeDuration);
+float distance = animInterpolator.getInterpolation(phase) 
+    * pathData.length;
 
 dashPaint.setPathEffect(new DashPathEffect(new float[] { distance, pathData.length }, 0));
 canvas.drawPath(pathData.path, dashPaint);
@@ -125,12 +127,13 @@ fillPaint = new Paint();
 So the drawing code will look like this (into the `onDraw()` method):
 
 ```java
-float fillPhase = MathUtil.constrain(0, 1, (elapsedTime - strokeDrawingDuration) * 1f / fillDuration);
+float fillPhase = 
+    MathUtil.constrain(0, 1, (elapsedTime - strokeDuration) * 1f / fillDuration);
 clippingTransform.transform(canvas, fillPhase, this);
 canvas.drawPath(pathData.path, fillPaint);
 ```
 
-As you can see, the time phase will be the percent of time consumed for filling drawing until this very moment. To calculate that we must substract the `strokeDrawingDuration` as it was used for the stroke (dash) animation.
+As you can see, the time phase will be the percent of time consumed for filling drawing until this very moment. To calculate that we must substract the `strokeDuration` as it was used for the stroke (dash) animation.
 
 The clipping logic will be delegated into a [ClippingTransform](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders/blob/master/library%2Fsrc%2Fmain%2Fjava%2Fcom%2Fgithub%2Fjorgecastillo%2Fclippingtransforms%2FClippingTransform.java) 
 implementation and the logic in charge to create the filling effect would reside into it's `transform()` method.
