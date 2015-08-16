@@ -130,7 +130,9 @@ So the drawing code will look like this (into the `onDraw()` method):
 
 ```java
 float fillPhase = 
-    MathUtil.constrain(0, 1, (elapsedTime - strokeDuration) * 1f / fillDuration);
+    MathUtil.constrain(0, 1, 
+    (elapsedTime - strokeDuration) * 1f / fillDuration);
+    
 clippingTransform.transform(canvas, fillPhase, this);
 canvas.drawPath(pathData.path, fillPaint);
 ```
@@ -140,13 +142,13 @@ As you can see, the time phase will be the percent of time consumed for filling 
 The clipping logic will be delegated into a [ClippingTransform](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders/blob/master/library%2Fsrc%2Fmain%2Fjava%2Fcom%2Fgithub%2Fjorgecastillo%2Fclippingtransforms%2FClippingTransform.java) 
 implementation and the logic in charge to create the filling effect would reside into it's `transform()` method.
 The only secret here is to think about clipping forms. If we have a figure that is getting drawn by a filling 
-paint (and limited by the path bounds), we would want to get a clipping figure attached to the canvas before the filling figure is drawn, so the filling gets clipped by the form we used.
+paint (and limited by the path bounds), we would want to get a clipping figure attached to the canvas before the filling figure is drawn, so the filling gets clipped by the form we have used.
 
 To understand this, i will use two examples.
 
 ## SpikesClippingTransform
 
-The `transform()` method for this custom `ClippingTransform` would look like:
+This will be the first sample, as it is the easier one too. The `transform()` method for this custom `ClippingTransform` would look like:
 
 ```java
 @Override public void transform(Canvas canvas, float currentFillPhase, View view) {
@@ -161,7 +163,23 @@ Ignore the `cacheDimensions()` method, as it is only used to store view dimensio
 
 ![spikes-gif]
 
-Once the spikes path is created, we will give it an `Y` dimension offset that will change depending on the `currentFillPhase` percent and the view height, so in every `onDraw()` call it will get shifted a little bit more to the top. That is simple. At the end, the `canvas.clipPath()` method will be used to set the clipping path to the created and positioned `spikesPath`, and we will use a `DIFFERENCE` operation between regions approach. (just for this time, but it is totally optional, you could create your `ClippingTransform` implementation basing it into another operations, like the default one, which is `INTERSECT`) (See [Region.Op documentation](http://developer.android.com/reference/android/graphics/Region.Op.html) for more details).
+Once the spikes path is created, we give it an `Y` dimension offset that will change depending on the `currentFillPhase` 
+percent and the view height, so in every `onDraw()` call it will get shifted a little bit more to the top.
+ That is done in the following line from the above snippet:
+
+```java
+spikesPath.offset(0, height * -currentFillPhase);
+```
+
+At the end, the `canvas.clipPath()` method will be used to set the clipping path to the created and 
+positioned `spikesPath`, and we will use a `DIFFERENCE` operation between regions approach. 
+
+```java
+canvas.clipPath(spikesPath, Region.Op.DIFFERENCE);
+```
+
+It is totally optional, since you could create your `ClippingTransform` implementation based into another 
+operations, like the default one, which is `INTERSECT` (See [Region.Op documentation](http://developer.android.com/reference/android/graphics/Region.Op.html) for more details).
 
 But, how to draw the spikes path? Here we are:
 
