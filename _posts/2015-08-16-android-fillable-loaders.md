@@ -95,7 +95,7 @@ bit more of the line in every cycle. So the line will keep growing, and the spac
 
 There is one method that will come really handy to us in the Android SDK to get this effect done. The `dashPaint.setPathEffect(new DashPathEffect(...)))` method. As its documentation says, the `DashPathEffect` will need to get an array of intervals in its constructor which must have an even number of items. The even indices of the array will specify the "on" intervals, and the odd indices specifying the "off" intervals. The second argument will be a phase value which will be used as an offset into the array, but which we will not be using for this library.
 
-**Note:** this patheffect only affects drawing with the paint's style set to STROKE or FILL_AND_STROKE. It is ignored if the drawing is done with style == FILL.
+**Note:** this patheffect only affects drawing with the paint's style set to `STROKE` or `FILL_AND_STROKE`. It is ignored if the drawing is done with style == FILL.
 
 But we are missing something here, right? The length of the dash for the current cycle that needs to get drawn. The complete code would be (into the `onDraw()` method):
 
