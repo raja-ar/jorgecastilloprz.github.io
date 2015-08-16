@@ -270,6 +270,10 @@ private float nextFloat(float upperBound) {
 }
 ```
 
+<div style="text-align:center">
+![spikes-gif]
+</div>
 
 [small-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSmall.gif
 [spikes-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSpikes.gif
+[waves-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoWaves.gif
