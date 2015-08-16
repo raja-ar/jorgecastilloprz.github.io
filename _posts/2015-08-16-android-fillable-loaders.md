@@ -349,4 +349,4 @@ Cheers!
 [small-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSmall.gif
 [spikes-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSpikes.gif
 [waves-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoWaves.gif
-[bez-curve]: ./art/quad_bez_curve.jpg
+[bez-curve]: http://jorgecastillo.xyz/art/quad_bez_curve.jpg
