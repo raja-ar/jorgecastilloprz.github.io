@@ -177,7 +177,7 @@ So here we have the first sample working! Feel free to check the full [SpikesCli
 
 ## WavesClippingTransform
 
-The `transform()` method will look like the previous sample one exactly, so i am not copying it here again. We will focus in the path building, as it is the most interesting stuff here. I will give you the code directly:
+The `transform()` method will look exactly like the one from the previous sample, so i am not copying it here again. We will focus in the path building, as it is the most interesting stuff here. I will give you the code directly:
 ```java
 private void buildClippingPath() {
     buildWaveAtIndex(currentWave++ % 128, 128);
