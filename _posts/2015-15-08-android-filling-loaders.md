@@ -108,3 +108,12 @@ So here it is, we already have our dash effect getting drawn. So lets keep movin
 
 # Filling Drawing
 
+So the filling drawing code will look like this:
+```java
+float fillPhase = MathUtil.constrain(0, 1, (elapsedTime - strokeDrawingDuration) * 1f / fillDuration);
+clippingTransform.transform(canvas, fillPhase, this);
+canvas.drawPath(pathData.path, fillPaint);
+```
+As you can see, the time phase will be the percent of time consumed for filling drawing until this very moment. To calculate that we must substract the `strokeDrawingDuration` as it was used for the dash animation.
+
+The `transform()` method will be delegated into a [ClippingTransform](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders/blob/master/library%2Fsrc%2Fmain%2Fjava%2Fcom%2Fgithub%2Fjorgecastillo%2Fclippingtransforms%2FClippingTransform.java) implementation and the logic in charge to create the filling effect would reside into it.
