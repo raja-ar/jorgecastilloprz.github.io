@@ -45,7 +45,7 @@ M 2948.00,18.00
 ```
 
 This is the SVG Path that you will parse to convert it to a `Path` object which will be 
-totally supported by the library. That is the only secret. To parse it, i am using the 
+totally supported by the library. To parse it, i am using the 
 [SvgPathParser](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders/blob/master/library%2Fsrc%2Fmain%2Fjava%2Fcom%2Fgithub%2Fjorgecastillo%2Fsvg%2FSvgPathParser.java) 
 class from [romannurik's Muzei](https://github.com/romannurik/muzei) code.
 There is not so much to look at here, it is just a *"made by hand"* parser which converts standard path 
