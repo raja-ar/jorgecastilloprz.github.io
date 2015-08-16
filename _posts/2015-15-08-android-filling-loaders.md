@@ -1,12 +1,19 @@
 ---
 layout: post
-title: AndroidFillingLoaders Open Source library
+title: Play with SVG Paths in Canvas with AndroidFillingLoaders
 ---
 
-[Jekyll](http://jekyllrb.com) is a static site generator, an open-source tool for creating simple yet powerful websites of all shapes and sizes. From [the project's readme](https://github.com/mojombo/jekyll/blob/master/README.markdown):
+We usually don't like the internal drawing logic from the Android SDK too much. When we read about it 
+we use to feel weird about it, as it seems to be a little bit tedious. But it is not that hard if you 
+read it carefully, and if you are capable of understanding it properly, you will end up creating really 
+interesting figures and animations like the following one:
 
-  > Jekyll is a simple, blog aware, static site generator. It takes a template directory [...] and spits out a complete, static website suitable for serving with Apache or your favorite web server. This is also the engine behind GitHub Pages, which you can use to host your project’s page or blog right here from GitHub.
+<div style="text-align:center">
+![Small gif][1]
+</div>
 
-It's an immensely useful tool and one we encourage you to use here with Hyde.
+The previous animation has been extracted from the [AndroidFillableLoaders library](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders) 
+which was published by me like two days ago. The lib wants to create an interesting filling effect for a custom silhouette 
+created by a given SVG Path, and it is totally open to be extended by the Android community.
 
-Find out more by [visiting the project on GitHub](https://github.com/mojombo/jekyll).
+[1]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSmall.gif
