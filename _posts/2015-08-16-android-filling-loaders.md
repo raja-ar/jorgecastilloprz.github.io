@@ -8,9 +8,7 @@ we use to feel weird, as it seems to be a little bit tedious. But it is not that
 read it carefully, and if you are capable of understanding it properly, you will end up creating really 
 interesting figures and animations like the following one:
 
-<div style="text-align:center">
 ![small-gif]
-</div>
 
 Isn't that cool?. The previous animation has been extracted from the [AndroidFillableLoaders library](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders) 
 which was published by me some days ago. The lib wants to create an interesting filling effect for a custom silhouette 
@@ -27,6 +25,7 @@ If you take any PNG image with transparency, you will be able to export its SVG 
 you have a clear example of how to do it.
 
 Once you have got the path, just copy the numbers that define it, which will look like the following:
+
 ```
 M 2948.00,18.00
    C 2956.86,18.01 2954.31,18.45 2962.00,19.91
@@ -79,6 +78,7 @@ feedback to the used in order to let him create proper reactions to the animatio
 
 Once the view gets into it's `TRACE_STARTED` state, the surrounding dash will get drawn. I have a 
 `Paint` initialized for that:
+
 ```java
 dashPaint = new Paint();
     dashPaint.setStyle(Paint.Style.STROKE);
@@ -86,12 +86,14 @@ dashPaint = new Paint();
     dashPaint.setStrokeWidth(strokeWidth);
     dashPaint.setColor(strokeColor);
 ```
+
 Everything pretty normal. But how to draw the dash? If you think about it, we will need to draw a little 
 bit more of the line in every cycle. So the line will keep growing, and the space still not drawn will decrease. There is one method that will come really handy to us in the Android SDK to get this effect done. The `dashPaint.setPathEffect(new DashPathEffect(...)))` method. As its documentation says, the `DashPathEffect` will need to get an array of intervals in its constructor which must have an even number of items. The even indices of the array will specify the "on" intervals, and the odd indices specifying the "off" intervals. The second argument will be a phase value which will be used as an offset into the array, but which we will not be using for this library.
 
 **Note:** this patheffect only affects drawing with the paint's style set to STROKE or FILL_AND_STROKE. It is ignored if the drawing is done with style == FILL.
 
 But we are missing something here, right? The length of the dash for the current cycle that needs to get drawn. The complete code would be (into the `onDraw()` method):
+
 ```java
 float phase = MathUtil.constrain(0, 1, elapsedTime * 1f / strokeDrawingDuration);
 float distance = animInterpolator.getInterpolation(phase) * pathData.length;
@@ -99,6 +101,7 @@ float distance = animInterpolator.getInterpolation(phase) * pathData.length;
 dashPaint.setPathEffect(new DashPathEffect(new float[] { distance, pathData.length }, 0));
 canvas.drawPath(pathData.path, dashPaint);
 ```
+
 We will get the current percent of the total time of the "animation" and the distance of the line to get drawn will be obtained from it, using an interpolator (a `DecelerateInterpolator`) as a base for the values. The `pathData.length` has been obtained previously using the [PathMeasure](http://developer.android.com/reference/android/graphics/PathMeasure.html) class.
 
 So here it is, we already have our dash effect getting drawn. So lets keep moving!
@@ -106,6 +109,7 @@ So here it is, we already have our dash effect getting drawn. So lets keep movin
 # Filling Drawing
 
 Again, i have a paint ready for this matter. This time is just  a common filling paint:
+
 ```java
 fillPaint = new Paint();
     fillPaint.setAntiAlias(true);
@@ -114,11 +118,13 @@ fillPaint = new Paint();
 ```
 
 So the drawing code will look like this (into the `onDraw()` method):
+
 ```java
 float fillPhase = MathUtil.constrain(0, 1, (elapsedTime - strokeDrawingDuration) * 1f / fillDuration);
 clippingTransform.transform(canvas, fillPhase, this);
 canvas.drawPath(pathData.path, fillPaint);
 ```
+
 As you can see, the time phase will be the percent of time consumed for filling drawing until this very moment. To calculate that we must substract the `strokeDrawingDuration` as it was used for the stroke (dash) animation.
 
 The clipping logic will be delegated into a [ClippingTransform](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders/blob/master/library%2Fsrc%2Fmain%2Fjava%2Fcom%2Fgithub%2Fjorgecastillo%2Fclippingtransforms%2FClippingTransform.java) 
@@ -131,6 +137,7 @@ To understand this, i will use two examples.
 ## SpikesClippingTransform
 
 The `transform()` method for this custom `ClippingTransform` would look like:
+
 ```java
 @Override public void transform(Canvas canvas, float currentFillPhase, View view) {
     cacheDimensions(view.getWidth(), view.getHeight());
@@ -139,11 +146,10 @@ The `transform()` method for this custom `ClippingTransform` would look like:
     canvas.clipPath(spikesPath, Region.Op.DIFFERENCE);
 }
 ```
+
 Ignore the `cacheDimensions()` method, as it is only used to store view dimensions in memory at first, and just once. The important stuff here is in the last three lines. The method `buildClippingPath()` will setup the `spikesPath` with the path we need to draw a figure with spikes border. I will give you a graphic example:
 
-<div style="text-align:center">
 ![spikes-gif]
-</div>
 
 Once the spikes path is created, we will give it an `Y` dimension offset that will change depending on the `currentFillPhase` percent and the view height, so in every `onDraw()` call it will get shifted a little bit more to the top. That is simple. At the end, the `canvas.clipPath()` method will be used to set the clipping path to the created and positioned `spikesPath`, and we will use a `DIFFERENCE` operation between regions approach. (just for this time, but it is totally optional, you could create your `ClippingTransform` implementation basing it into another operations, like the default one, which is `INTERSECT`) (See [Region.Op documentation](http://developer.android.com/reference/android/graphics/Region.Op.html) for more details).
 
@@ -171,6 +177,7 @@ private void buildClippingPath() {
     spikesPath.close();
   }
 ```
+
 Dont be afraid about it. If you analyze it you will see that i am just using a constant `withDiff` value to shift in X axis between each spike, and a `heightDiff` value to be used as a positive/negative shift alternation in order to move the next Y coordinate and create the spikes.
 
 So here we have the first sample working! Feel free to check the full [SpikesClippingTransform](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders/blob/master/library%2Fsrc%2Fmain%2Fjava%2Fcom%2Fgithub%2Fjorgecastillo%2Fclippingtransforms%2FSpikesClippingTransform.java) class out if you want more details about it!
@@ -180,12 +187,15 @@ So here we have the first sample working! Feel free to check the full [SpikesCli
 The `transform()` method will look exactly like the one from the previous sample, so i am not copying it here again. We will focus in the path building, as it is the most interesting stuff here.
 
 I have 128 different wave batches propagated over the time so i can rotate over them:
+
 ```java
 private void buildClippingPath() {
     buildWaveAtIndex(currentWaveBatch++ % 128, 128);
 }
 ```
+
 128 is just an arbitrary number, and the more wave batches you add to the loop, the slower will become the total animation. Think about them as frames of a standard animation (it is what they really are at a concept level). So the `index` argument of the following method will change for every `onDraw()` call. The batches will contain four waves each, and those waves contained will vary its position and `Y` variation depending on the `currentWaveBatch` index.
+
 ```java
 private void buildWaveAtIndex(int index, int waveCount) {
     float startingHeight = height - 20;
@@ -273,21 +283,19 @@ private float nextFloat(float upperBound) {
     return (Math.abs(random.nextFloat()) % (upperBound + 1));
 }
 ```
+
 As i said, there are 4 waves being drawn for every wave batch constructed by the above method. The `xMovement` var is pretty explicit, as it handles the movement shifting over the `X` axis. The waves are getting drawn using the `path.quatTo()` method, which draws a quadratic *Bezier* courve starting at the current point of the path, using the first given point (X,Y coordinates) as a control point, and ending into the last given point coordinates. 
+
 ```java
 path.quadTo(controlPointX, controlPointY, endPointX, endPointY)
 ```
 
-<div style="text-align:center">
 ![bez-curve]
-</div>
 
 The variation will be random, and applied to the control point `Y` coordinate with an alternate sign for each one of the waves, so we can get the concave / convex alternation. The `divisions` are 8 (half a wave) to know where to start every wave.
 It is a little bit tedious to understand at the beginning, but i hope you can get a clear idea of how to get theese sort of clipping path figures working. Here is a sample of the final result for the wave effect:
 
-<div style="text-align:center">
 ![waves-gif]
-</div>
 
 Cheers!
 
