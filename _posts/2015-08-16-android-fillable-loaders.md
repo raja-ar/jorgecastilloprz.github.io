@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Play with SVG Paths in Canvas with AndroidFillingLoaders
+title: Play with SVG Paths in Canvas with AndroidFillableLoaders
 ---
 
 We usually don't like the internal drawing logic from the Android SDK too much. When we read about it 
@@ -295,7 +295,6 @@ path.quadTo(controlPointX, controlPointY, endPointX, endPointY)
 The variation will be random, and applied to the control point `Y` coordinate with an alternate sign for each one of the waves, so we can get the concave / convex alternation. The `divisions` are 8 (half a wave) to know where to start every wave.
 It is a little bit tedious to understand at the beginning, but i hope you can get a clear idea of how to get theese sort of clipping path figures working. Here is a sample of the final result for the wave effect:
 
-{: .center}
 ![waves-gif]
 
 Cheers!
