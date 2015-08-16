@@ -9,7 +9,7 @@ read it carefully, and if you are capable of understanding it properly, you will
 interesting figures and animations like the following one:
 
 <div style="text-align:center">
-![Small gif][1]
+![Small-gif]
 </div>
 
 Isn't that cool?. The previous animation has been extracted from the [AndroidFillableLoaders library](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders) 
@@ -75,9 +75,6 @@ The `drawingState` list for the view is going to be:
 Every time the view switches it's state, the `OnStateChangeListener` method will be called to give external 
 feedback to the used in order to let him create proper reactions to the animation.
 
-
-[1]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSmall.gif
-
 # Dash drawing
 
 Once the view gets into it's `TRACE_STARTED` state, the surrounding dash will get drawn. I have a 
@@ -117,3 +114,6 @@ canvas.drawPath(pathData.path, fillPaint);
 As you can see, the time phase will be the percent of time consumed for filling drawing until this very moment. To calculate that we must substract the `strokeDrawingDuration` as it was used for the dash animation.
 
 The `transform()` method will be delegated into a [ClippingTransform](https://github.com/JorgeCastilloPrz/AndroidFillableLoaders/blob/master/library%2Fsrc%2Fmain%2Fjava%2Fcom%2Fgithub%2Fjorgecastillo%2Fclippingtransforms%2FClippingTransform.java) implementation and the logic in charge to create the filling effect would reside into it.
+
+
+[Small-gif]: https://raw.githubusercontent.com/JorgeCastilloPrz/AndroidFillableLoaders/master/art/demoSmall.gif
