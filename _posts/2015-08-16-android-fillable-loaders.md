@@ -2,6 +2,7 @@
 layout: post
 title: Play with SVG Paths in Canvas with AndroidFillableLoaders
 comments: true
+twitter: false 
 ---
 
 We usually don't like the internal drawing logic from the Android SDK too much. When we read about it 
