@@ -24,7 +24,7 @@ I have been part of plenty of interesting Android projects in my professional ca
 * I worked in a lot of personal projects and so many application projects for third party companies.
 
 
-## Android / Java Open Source libraries
+## Android / Java / Scala Open Source libraries
 
 I learned a lot from the Open Source scene, and that is the main reason for me to try to contribute as much as i can on it. I have created some Open Source projects and libraries. You can check [my Gihub profile](https://github.com/JorgeCastilloPrz/) for some examples, but i will talk a little bit about some of them:
 
