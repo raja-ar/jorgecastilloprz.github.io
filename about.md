@@ -10,19 +10,21 @@ final form.
 
 I really like the full development process of a project and to be involved in nice environments to get 
 the work done. Developers are ambitious, so learning from each other is the best chance to improve we have. 
+
 And the spanish community is pretty good, i have to say.
  
  
-# Android apps
+## Android apps
 
 I have been part of plenty of interesting Android projects in my professional career. Here are some examples:
-*  I got involved in a **XMPP protocol based chat with a secret side** secured behind a blocking pattern (very similar to *Telegram*). Even if it is not available at the Google Play Store anymore, you can get a sneak peak from the app [here](http://www.droiders.com/es/tag/enjoystr-es/). 
+
+* I got involved in a **XMPP protocol based chat with a secret side** secured behind a blocking pattern (very similar to *Telegram*). Even if it is not available at the Google Play Store anymore, you can get a sneak peak from the app [here](http://www.droiders.com/es/tag/enjoystr-es/). 
 * I had the chance to work on tons of geolocation based apps, like the experimental project called [Nativo](https://play.google.com/store/apps/details?id=com.droiders.android.nativovanilla) which displayed near places of interesent around you using augmented reality. This project was mainly created for Google Glass, but an early version was created too for mobile. 
 * I worked in countless `GLASS` applications too, as in `Android Wear` apps.
 * I worked in a lot of personal projects and so many application projects for third party companies.
 
 
-# Android / Java Open Source libraries
+## Android / Java Open Source libraries
 
 I learned a lot from the Open Source scene, and that is the main reason for me to try to contribute as much as i can on it. I have created some Open Source projects and libraries. You can check [my Gihub profile](https://github.com/JorgeCastilloPrz/) for some examples, but i will talk a little bit about some of them:
 
@@ -34,7 +36,8 @@ I learned a lot from the Open Source scene, and that is the main reason for me t
 * [Mirage](https://github.com/JorgeCastilloPrz/Mirage) is a prototype of an app that is still being created on my free time. It is a geolocation based app for excursionists displaying plenty of interesting nature places around.
 * [Dagger2Scopes](https://github.com/JorgeCastilloPrz/Dagger2Scopes) was an early simple example of `Dagger 2` scoping working through components. It is not finished and i am planning to revamp it totally to provide an advance working code sample.
 * [ScalaForTheImpatient](https://github.com/JorgeCastilloPrz/ScalaForTheImpatient) is a `Scala` functional language project where i am solving all the exercises proposed by the [ScalaForTheImpatient](http://www.horstmann.com/scala/index.html) book.
-# Android games
+
+## Android games
 
 I got the chance to work in a game development company where we created games composed totally by custom 
 views and custom animations. Those were sport manager games where we had more than a million users. It 
