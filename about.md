@@ -17,6 +17,7 @@ And the spanish community is pretty good, i have to say.
 
 I have been part of plenty of interesting Android projects in my professional career. Here are some examples:
 
+* I am currently working in the Android version of the [New York Jets official app](https://itunes.apple.com/us/app/official-new-york-jets/id460494117?mt=8) for a third party company. It is still not released.
 * I got involved in a **XMPP protocol based chat with a secret side** secured behind a blocking pattern (very similar to *Telegram*). Even if it is not available at the Google Play Store anymore, you can get a sneak peak from the app [here](http://www.droiders.com/es/tag/enjoystr-es/). 
 * I had the chance to work on tons of geolocation based apps, like the experimental project called [Nativo](https://play.google.com/store/apps/details?id=com.droiders.android.nativovanilla) which displayed near places of interesent around you using augmented reality. This project was mainly created for Google Glass, but an early version was created too for mobile. 
 * I worked in countless `GLASS` applications too, as in some `Android Wear` apps.
