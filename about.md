@@ -12,6 +12,7 @@ I really like the full development process of a project and to be involved in ni
 the work done. Developers are ambitious, so learning from each other is the best chance to improve we have. 
 And the spanish community is pretty good, i have to say.
  
+ 
 # Android apps
 
 I have been part of plenty of interesting Android projects in my professional career. Here are some examples:
@@ -19,6 +20,7 @@ I have been part of plenty of interesting Android projects in my professional ca
 * I had the chance to work on tons of geolocation based apps, like the experimental project called [Nativo](https://play.google.com/store/apps/details?id=com.droiders.android.nativovanilla) which displayed near places of interesent around you using augmented reality. This project was mainly created for Google Glass, but an early version was created too for mobile. 
 * I worked in countless `GLASS` applications too, as in `Android Wear` apps.
 * I worked in a lot of personal projects and so many application projects for third party companies.
+
 
 # Android / Java Open Source libraries
 
