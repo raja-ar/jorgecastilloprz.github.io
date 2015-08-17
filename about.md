@@ -50,4 +50,4 @@ was an interesting challenge. Here are some examples:
 
 ## Contact
 
-If you want to get more details about me, feel free to check my [Curriculum Vitae](./public/CVJorgeCastilloPerez.pdf) or my [LinkedIn profile](https://es.linkedin.com/in/jorgecastilloprz).
+If you want to get more details about me, feel free to check my [Curriculum Vitae](../public/CVJorgeCastilloPerez.pdf) or my [LinkedIn profile](https://es.linkedin.com/in/jorgecastilloprz).
