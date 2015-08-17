@@ -47,3 +47,7 @@ was an interesting challenge. Here are some examples:
 * [NBA General Manager 2015](https://play.google.com/store/apps/details?id=com.fromthebenchgames.nbamanager15) is one of the official NBA licensed games with more than a million users.
 * [Football Franchise 2015](https://play.google.com/store/apps/details?id=com.fromthebenchgames.nflpamanager14) is an NFL manager game based in the oficial NFL.
 * [Baseball General Manager 2015](https://play.google.com/store/apps/details?id=com.fromthebenchgames.mlbpamanager14) is a baseball manager game based in the oficial Major League Baseball.
+
+## Contact
+
+If you want to get more details about me, feel free to check my [Curriculum Vitae](./public/CVJorgeCastilloPerez.pdf) or my [LinkedIn profile](https://es.linkedin.com/in/jorgecastilloprz).
