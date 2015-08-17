@@ -14,3 +14,59 @@
     margin-bottom: 16px;
     vertical-align: middle;
 }
+
+/**
+* Icons
+*/
+
+.icon svg {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    vertical-align: middle;
+}
+
+.icon path{
+    fill: #ffffff;
+}
+
+/**
+*  Lists
+*/
+
+.social-media-list {
+    list-style: none;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    line-height: 1.5;
+    -webkit-padding-start: 0px;
+}
+
+
+.social-media-list li{
+    display:inline;
+}
+
+.social-media-list a:hover{
+    text-decoration: none;
+}
+
+
+.media-line {
+    height: 50px;
+    width: wrap-content;
+    text-align: center;
+}
+
+/**
+*  Sidebar position
+*/
+
+.sidebar-content{
+    margin-top: 40px;
+}
+
+.sidebar-title {
+    font-size: 2.5rem;
+}
